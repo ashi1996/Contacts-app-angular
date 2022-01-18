@@ -1,0 +1,28 @@
+.card {
+  width: 100%;
+}
+
+.cardFooter{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.delBtn{
+  border: none;
+  padding: 8px ;
+  width: 70px;
+  background: rgb(245, 111, 111);
+}
+
+.editBtn{
+  border: none;
+  padding: 8px ;
+  width: 70px;
+  background: rgb(12, 147, 226);
+}
+
+// .example-header-image {
+//   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+//   background-size: cover;
+// }
