@@ -57,25 +57,25 @@ button:active{
 }
 
 // option 2 
-// @media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
 
-//   input {
-//     width: 100%;
-//     padding: 10px 20px;
-//     margin: 4px 0;
-//     border: none;
-//     border-bottom: 0.5px solid #aaa;
-//     outline: none;
-//   }
+  input {
+    width: 100%;
+    padding: 10px 20px;
+    margin: 4px 0;
+    border: none;
+    border-bottom: 0.5px solid #aaa;
+    outline: none;
+  }
 
-//   .ControlsGroup{
-//     display: flex;
-//     flex-wrap: wrap;
-//     justify-content: space-between;
+  .ControlsGroup{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     
-//     .controlHold{
-//       width: 100%;
-//     }
-//   }
+    .controlHold{
+      width: 100%;
+    }
+  }
   
-// }
+}

@@ -1,16 +1,19 @@
 <mat-card class="card">
-  <mat-card-title>name</mat-card-title>
+  <mat-card-title>{{item.firstName +" "+ item.lastName}}</mat-card-title>
  
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <img mat-card-image src="{{item.imgUrl ? item.imgUrl : defaulteImg}}">
+  <!-- <img mat-card-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3Jqi7h_pKXpdIrGpzz2XQA_VTSou69xk4KA&usqp=CAU"> -->
 
   <mat-card-content>
    <div>Email:</div>
-   <div>a@gmail.com</div>
+   <div>{{item.email}}</div>
    <div>Phone number:</div>
-   <div>0552286546</div>
+   <div>{{item.phone}}</div>
   </mat-card-content>
   <mat-card-actions class="cardFooter">
-    <button class="delBtn" (click)="onDel($event)" mat-button>Delete</button>
-    <button class="editBtn" mat-button>Edit</button>
+    <button class="delBtn" (click)="onDel()" mat-button>Delete</button>
+    <a href="#flyUp">
+      <button class="editBtn" (click)="onEdit()" mat-button>Edit</button>
+    </a>
   </mat-card-actions>
 </mat-card>

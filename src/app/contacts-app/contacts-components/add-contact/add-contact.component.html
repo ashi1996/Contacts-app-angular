@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container" >
   <h3 >Create New Contact / Edit Contact</h3>
   
-  <form [formGroup]="addContactForm" (ngSubmit)="onSub()">
+  <form *ngIf="true" [formGroup]="addContactForm" (ngSubmit)="onSub()">
 
     <h4>Personal Information</h4>
     <div class="ControlsGroup">
@@ -40,5 +40,8 @@
       <button [disabled]="addContactForm.invalid" type="submit">Save / Add</button>
     </div> 
   </form>
+
+  <mat-icon>expand_more</mat-icon>
+
 </div>
 <hr>

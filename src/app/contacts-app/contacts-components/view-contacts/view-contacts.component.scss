@@ -2,14 +2,20 @@ main{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 .item{
-  width: 30%;
+  width: 25%;
   padding: 12px;
-  
+
 }
 
+.noContactsError{
+  color: red;
+  margin-top: 12px;
+}
 
 @media screen and (max-width: 992px) {
   .item{

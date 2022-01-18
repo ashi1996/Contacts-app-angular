@@ -1,25 +1,15 @@
+<add-contact [onPressEdit]="onPressEdit"
+            (createContact)="createContact($event)"
+            (editContact)="editContact($event)">
+</add-contact>
 <main class="container">
-  <div class="item">
-    <item-contact ></item-contact>
-  </div>
-  <div class="item">
-    <item-contact ></item-contact>
-  </div>
-  <div class="item">
-    <item-contact ></item-contact>
-  </div>
-  <div class="item">
-    <item-contact ></item-contact>
-  </div>
-  <div class="item">
-    <item-contact ></item-contact>
-  </div>
-  <div class="item">
-    <item-contact ></item-contact>
-  </div>
   
-  
- 
-   
- 
+  <div *ngFor="let item of contacts;"  class="item">
+    <item-contact (delItem)="delContact($event)" [item]="item"
+                 (editItem)="onPressEditContact($event)">
+    </item-contact>
+  </div>
+  <div *ngIf="!contacts.length">
+    <h3 class="noContactsError">There is no contacts!</h3>
+  </div>
 </main>
