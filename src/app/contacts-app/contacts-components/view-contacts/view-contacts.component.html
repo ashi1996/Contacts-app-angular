@@ -1,4 +1,7 @@
-<add-contact [onPressEdit]="onPressEdit"
+<add-contact
+            [viewAddContactForm]="viewAddContactForm"
+            (toggleForm)="onToggleForm($event)"
+            [onPressEdit]="onPressEdit"
             (createContact)="createContact($event)"
             (editContact)="editContact($event)">
 </add-contact>

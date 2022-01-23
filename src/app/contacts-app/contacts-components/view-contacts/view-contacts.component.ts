@@ -1,33 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { concat } from 'rxjs';
+import { Component, OnInit , OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Contact } from '../../contacts-models/contact.interface';
 import { ApiService } from '../../services/apiService/apiService.service';
 import { Store } from '../../store/store';
-import { State } from '../../store/store-state.interace';
+
+
 
 @Component({
   selector: 'view-contacts',
   templateUrl: './view-contacts.component.html',
   styleUrls: ['./view-contacts.component.scss']
 })
-export class ViewContactsComponent implements OnInit {
+export class ViewContactsComponent implements OnInit ,OnDestroy {
 
   constructor(private store : Store , private apiService :ApiService) { }
 
   contacts:Contact[] = []
   onPressEdit:Contact = undefined
+  viewAddContactForm:boolean = true
   
-  
+  subscriptionA:Subscription
+  subscriptionB:Subscription
   ngOnInit() {
   //  update store frome server
-    this.apiService.getContacts$.subscribe(dataFromeServer=>{
+   this.subscriptionA = this.apiService.getContacts$.subscribe(dataFromeServer=>{
       this.store.set('contacts' , dataFromeServer)
     })
  // get data from store
-    this.store.getStore().subscribe(data=>{
+    this.subscriptionB = this.store.getStore().subscribe(data=>{
      this.contacts = data['contacts']
     })
+    // this.subscriptionA.add(this.subscriptionB)
+    
+  }
 
+  ngOnDestroy(): void {
+       console.log("LLL")
+      this.subscriptionA.unsubscribe()
+      this.subscriptionB.unsubscribe()
+    
   }
 
   delContact(delContact:Contact){
@@ -36,8 +47,7 @@ export class ViewContactsComponent implements OnInit {
     let updateContact = this.contacts.filter((contact:Contact)=> {
       return delContact.id !== contact.id
     })
-   this.store.set('contacts' , updateContact)
-  
+   this.store.set('contacts' , updateContact) 
   }
 
 
@@ -63,7 +73,12 @@ export class ViewContactsComponent implements OnInit {
   }
 
   onPressEditContact(editContact:Contact){
+    this.viewAddContactForm = true
    this.onPressEdit = editContact
+  }
+
+  onToggleForm(showForm:boolean){
+   this.viewAddContactForm = showForm
   }
 
 

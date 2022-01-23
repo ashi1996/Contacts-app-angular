@@ -25,6 +25,14 @@ main{
 }
 @media screen and (max-width: 600px) {
 
+  main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    max-height: 100vh;
+    overflow-y: revert;
+  }
+
   .item{
     width: 100%;
     padding: 12px;

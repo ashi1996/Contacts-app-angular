@@ -1,21 +1,21 @@
 <div class="container" >
   <h3 >Create New Contact / Edit Contact</h3>
   
-  <form *ngIf="true" [formGroup]="addContactForm" (ngSubmit)="onSub()">
+  <form *ngIf="viewAddContactForm" [formGroup]="addContactForm" (ngSubmit)="onSub()">
 
     <h4>Personal Information</h4>
     <div class="ControlsGroup">
       <div class="controlHold">
-        <input class="form-control" type="text" formControlName="firstName" placeholder="First Name">
+        <input trim="blur" class="form-control" type="text" formControlName="firstName" placeholder="First Name">
         <small class="error" *ngIf="addContactForm.get('firstName')?.hasError('required') && addContactForm.get('firstName')?.touched" >First Name is required.</small>
-        <small class="error" *ngIf="addContactForm.get('firstName')?.hasError('minlength') && addContactForm.get('firstName')?.touched " >First Name must be at least 2 characters long.</small>
-        <small class="error" *ngIf="addContactForm.get('firstName')?.hasError('maxlength') && addContactForm.get('firstName')?.touched " >Firs Name Cant be greater than 10 characters.</small>
+        <small class="error" *ngIf="addContactForm.get('firstName')?.hasError('minlength') && addContactForm.get('firstName')?.dirty " >First Name must be at least 2 characters long.</small>
+        <small class="error" *ngIf="addContactForm.get('firstName')?.hasError('maxlength') && addContactForm.get('firstName')?.dirty " >Firs Name Cant be greater than 10 characters.</small>
       </div>
       <div class="controlHold">
-        <input class="form-control" type="text" formControlName="lastName" placeholder="Last Name">
+        <input trim="blur" class="form-control" type="text" formControlName="lastName" placeholder="Last Name">
         <small class="error" *ngIf="addContactForm.get('lastName')?.hasError('required') && addContactForm.get('lastName')?.touched" >Last Name is required.</small>
-        <small class="error" *ngIf="addContactForm.get('lastName')?.hasError('minlength') && addContactForm.get('lastName')?.touched " >Last Name must be at least 2 characters long.</small>
-        <small class="error" *ngIf="addContactForm.get('lastName')?.hasError('maxlength') && addContactForm.get('lastName')?.touched " >Last Name Cant be greater than 10 characters.</small>
+        <small class="error" *ngIf="addContactForm.get('lastName')?.hasError('minlength') && addContactForm.get('lastName')?.dirty " >Last Name must be at least 2 characters long.</small>
+        <small class="error" *ngIf="addContactForm.get('lastName')?.hasError('maxlength') && addContactForm.get('lastName')?.dirty " >Last Name Cant be greater than 10 characters.</small>
       </div>
     </div>
     <hr>
@@ -23,7 +23,7 @@
     <h4>Contact Information</h4>
     <div class="ControlsGroup">
       <div class="controlHold">
-        <input class="form-control" type="email" formControlName="email" placeholder="email">
+        <input appBlockCopyPaste class="form-control" type="email" formControlName="email" placeholder="email">
         <small class="error" *ngIf="addContactForm.get('email')?.hasError('required') && addContactForm.get('email')?.touched" >Email is required.</small>
         <small class="error" *ngIf="addContactForm.get('email')?.hasError('pattern') && addContactForm.get('email')?.touched " > Please enter a valid email.</small>
       </div>
@@ -33,7 +33,7 @@
         <small class="error" *ngIf="addContactForm.get('phone')?.hasError('pattern') && addContactForm.get('phone')?.touched " >Please enter a valid phone</small>
       </div>
       <div class="controlHold">
-        <input class="form-control" type="text" formControlName="imgUrl" placeholder="img url">
+        <input trim="blur" class="form-control" type="text" formControlName="imgUrl" placeholder="img url">
       </div>
     </div>
     <div>
@@ -41,7 +41,6 @@
     </div> 
   </form>
 
-  <mat-icon>expand_more</mat-icon>
-
+  <mat-icon title="Hide and show form" (click)="toggleViewForm()">{{!viewAddContactForm ? 'expand_more' : 'expand_less'}}</mat-icon>
 </div>
 <hr>

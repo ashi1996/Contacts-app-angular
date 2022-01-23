@@ -1,5 +1,6 @@
-import { Component, OnInit , Input , Output ,EventEmitter} from '@angular/core';
+import { Component, OnInit , Input , Output ,EventEmitter  } from '@angular/core';
 import { Contact } from '../../contacts-models/contact.interface';
+import { AddContactComponent } from '../add-contact/add-contact.component';
 
 @Component({
   selector: 'item-contact',
@@ -22,9 +23,11 @@ export class ItemContactComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+   
   }
 
-  onDel(){
+  onDel(delEvent){
+    
     if(window.confirm(`Are you sure you want to delete ${this.item.firstName}  ${this.item.lastName}?`)){
       this.delItem.emit(this.item)
     }

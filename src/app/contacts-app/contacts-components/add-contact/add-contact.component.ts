@@ -10,6 +10,9 @@ import { Contact } from '../../contacts-models/contact.interface';
 export class AddContactComponent implements OnInit, OnChanges {
 
 @Input()
+ viewAddContactForm:boolean
+
+@Input()
 onPressEdit
 
 @Output()
@@ -17,6 +20,9 @@ editContact = new EventEmitter<Contact>()
 
 @Output()
 createContact = new EventEmitter<Contact>()
+
+@Output()
+toggleForm = new EventEmitter<boolean>()
 
   constructor(private formBuilder : FormBuilder) { }
 
@@ -30,30 +36,36 @@ createContact = new EventEmitter<Contact>()
 
 
   ngOnInit() {
-    
+   
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-     if(changes['onPressEdit'].currentValue){
+     if(changes['onPressEdit']?.currentValue){
        this.addContactForm.patchValue(changes['onPressEdit'].currentValue)
      }
   }
 
-  errorValidation(controlName:string , error:string){
-    if(this.addContactForm.get(controlName)?.hasError(error) && this.addContactForm.get(controlName)?.untouched){
-      return false
-    }
-    return  true
+  
+
+  cleanForm(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach((key) => formGroup.get(key).setValue(formGroup.get(key).value.trim()));
   }
 
+  // errorValidation(controlName:string , error:string){
+  //   return (this.addContactForm.get(controlName)?.hasError(error) && this.addContactForm.get(controlName)?.untouched)
+  // }
+
   onSub(){
+
+
     // Edit
     if(this.onPressEdit){
-      if(window.confirm(`Are you sure you want to edit ${this.onPressEdit.firstName}  ${this.onPressEdit.lastName}?`)){
-       let toUpdate = {...this.onPressEdit, ...this.addContactForm.value}
-       this.editContact.emit(toUpdate)
-       this.onPressEdit = undefined
+      if(!window.confirm(`Are you sure you want to edit ${this.onPressEdit.firstName}  ${this.onPressEdit.lastName}?`)){
+       return
       }
+      let toUpdate = {...this.onPressEdit, ...this.addContactForm.value}
+      this.editContact.emit(toUpdate)
+      this.onPressEdit = undefined
     }
     else{
     //  Create
@@ -63,6 +75,8 @@ createContact = new EventEmitter<Contact>()
     this.addContactForm.reset()
   }
 
-
+  toggleViewForm(){
+   this.toggleForm.emit(!this.viewAddContactForm)
+  }
 
 }
